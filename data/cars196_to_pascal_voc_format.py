@@ -23,6 +23,20 @@ CATEGORY_INDEX = label_map_util.create_category_index_from_labelmap(
 
 
 def create_tf_example(example):
+  """Converts an example from the cars196 dataset into a format suitable for the
+  TensorFlow Object Detection API.
+
+  Args:
+    example: A dictionary containing at least the following keys:
+      {
+        'image': A float32 Tensor of shape `[height, width, 3]`.
+        'bbox': A float32 Tensor of shape `[4]` containing the normalized bounding
+          box coordinates in the order `[ymin, xmin, ymax, xmax]`.
+      }
+
+  Returns:
+     encoded TFRecord example.
+  """
   height, width = example['image'].shape[:-1]
   filename = b''  # Filename of the image. Empty if image is not from file
   encoded_image_data = tf.image.encode_jpeg(example['image']).numpy()  # Encoded image
@@ -58,6 +72,13 @@ def create_tf_example(example):
 
 
 def write_sharded_tf_records(examples, output_filebase, num_shards):
+  """Writes encoded TFRecords to `num_shards` files.
+
+  Args:
+    examples: encoded TFRecord examples.
+    output_filebase: Path to the destination directory.
+    num_shards: number of output shards.
+  """
   with contextlib2.ExitStack() as tf_record_close_stack:
     output_tfrecords = tf_record_creation_util.open_sharded_output_tfrecords(
         tf_record_close_stack, output_filebase, num_shards)
