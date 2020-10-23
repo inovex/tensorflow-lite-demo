@@ -9,4 +9,4 @@ Object detection model for car detection on mobile edge devices.
 
 ## Prepare input data
 
-    `python data/cars196_to_pascal_voc_format.py --output_path=data --num_shards=10`
+`python data/cars196_to_pascal_voc_format.py --output_path=data --num_shards=10`
