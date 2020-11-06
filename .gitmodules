@@ -1,0 +1,3 @@
+[submodule "od-api/models"]
+	path = od-api/models
+	url = git@github.com:tensorflow/models.git
