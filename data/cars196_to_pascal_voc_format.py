@@ -1,5 +1,5 @@
 """
-Created by Robin Baumann <https://github.com/RobinBaumann> at October 08, 2020.
+Created by Robin Baumann <https://github.com/RobinBaumann> on October 08, 2020.
 """
 import os
 
